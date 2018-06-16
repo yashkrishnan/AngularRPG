@@ -1,6 +1,6 @@
-import { Component } from "@angular/core";
+import {Component} from "@angular/core";
 
-@Component ({
+@Component({
   selector: "start-component",
   templateUrl: "./start.component.html",
   styleUrls: ["./start.component.css"]

@@ -1,6 +1,6 @@
-import { Component } from "@angular/core";
+import {Component} from "@angular/core";
 
-@Component ({
+@Component({
   selector: "inventory-component",
   templateUrl: "./inventory.component.html",
   styleUrls: ["./inventory.component.css"]

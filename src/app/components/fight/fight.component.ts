@@ -1,6 +1,6 @@
-import { Component } from "@angular/core";
+import {Component} from "@angular/core";
 
-@Component ({
+@Component({
   selector: "fight-component",
   templateUrl: "./fight.component.html",
   styleUrls: ["./fight.component.css"]
