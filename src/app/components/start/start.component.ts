@@ -6,5 +6,5 @@ import {Component} from "@angular/core";
   styleUrls: ["./start.component.css"]
 })
 export class StartComponent {
-  gameTitle = "Test Data"
+  gameTitle = "Angular RPG"
 }
