@@ -1,6 +1,3 @@
-import {RaceOptions, ClassOptions, GenderOptions} from "./character.options";
-import {b, st} from "@angular/core/src/render3";
-
 export class Armor {
   name: string;
   attackBarrierBonus: number;
@@ -69,7 +66,7 @@ export class BaseCharacter {
   equippedArmor: Armor;
   spriteUrl: string;
 
-  constructor(name: string, health: number, skills = {attack: 0, sneak: 0, persuade:0, intelligence:0}) {
+  constructor(name: string, health: number, skills = {attack: 0, sneak: 0, persuade: 0, intelligence: 0}) {
     this.name = name;
     this.maxHealth = health;
     this.currentHealth = health;
