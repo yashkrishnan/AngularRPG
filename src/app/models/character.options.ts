@@ -37,4 +37,3 @@ export const CharacterOptions = {
     GenderOptions.female
   ]
 }
-
