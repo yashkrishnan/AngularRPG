@@ -1,4 +1,4 @@
-import {ClassOptions, GenderOptions} from "./character.options";
+import {ClassOptions, GenderOptions, RaceOptions} from "./character.options";
 
 export class Armor {
   name: string;
@@ -233,5 +233,30 @@ export class Priest extends Hero {
     this.maxHealth = Math.floor(Math.random() * 6) + 1;
     this.currentHealth = this.maxHealth;
     super.levelUp();
+  }
+}
+
+export const checkRace = (hero: Hero) => {
+  switch (hero.race) {
+    case RaceOptions.human:
+      hero.skills.persuade += 2;
+      hero.skills.intelligence++;
+      hero.skills.sneak -= 2;
+      break;
+    case RaceOptions.elf:
+      hero.skills.persuade -= 2;
+      hero.skills.intelligence += 2;
+      hero.skills.sneak++;
+      break;
+    case RaceOptions.dwarf:
+      hero.skills.persuade++;
+      hero.skills.intelligence -= 2;
+      hero.skills.attack += 2;
+      break;
+    case RaceOptions.halfling:
+      hero.skills.persuade -= 2;
+      hero.skills.sneak += 2;
+      hero.skills.attack++;
+      break;
   }
 }
