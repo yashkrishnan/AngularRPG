@@ -1,3 +1,5 @@
+import {ClassOptions, GenderOptions} from "./character.options";
+
 export class Armor {
   name: string;
   attackBarrierBonus: number;
@@ -157,5 +159,79 @@ export class Hero extends BaseCharacter {
     this.currentHealth = this.maxHealth;
     this.isIncapacitated = false;
     this.turnsUntilSpecialAvailableAgain = 0;
+  }
+}
+
+export class Warrior extends Hero {
+  constructor(name, gender, race, level, health, skills, weapon, armor) {
+    super(name, gender, race, level, health, skills, weapon, armor);
+
+    this.characterRole = ClassOptions.warrior;
+    this.skills.attack += 2;
+    this.skills.persuade++;
+    this.skills.sneak--;
+    this.skills.intelligence--;
+    this.spriteUrl = this.gender === GenderOptions.male ? "./assets/warriorm.png" : "./assets/warriorf.png";
+  }
+
+  levelUp(): void {
+    this.maxHealth = Math.floor(Math.random() * 10) + 1;
+    this.currentHealth = this.maxHealth;
+    super.levelUp();
+  }
+}
+
+export class Ranger extends Hero {
+  constructor(name, gender, race, level, health, skills, weapon, armor) {
+    super(name, gender, race, level, health, skills, weapon, armor);
+
+    this.characterRole = ClassOptions.ranger;
+    this.skills.attack--;
+    this.skills.persuade--;
+    this.skills.sneak += 2;
+    this.skills.intelligence++;
+    this.spriteUrl = this.gender === GenderOptions.male ? "./assets/rangerrm.png" : "./assets/rangerf.png";
+  }
+
+  levelUp(): void {
+    this.maxHealth = Math.floor(Math.random() * 8) + 1;
+    this.currentHealth = this.maxHealth;
+    super.levelUp();
+  }
+}
+
+export class Rouge extends Hero {
+  constructor(name, gender, race, level, health, skills, weapon, armor) {
+    super(name, gender, race, level, health, skills, weapon, armor);
+    this.characterRole = ClassOptions.rouge;
+    this.skills.attack++;
+    this.skills.persuade--;
+    this.skills.sneak += 2;
+    this.skills.intelligence--;
+    this.spriteUrl = this.gender === GenderOptions.male ? "./assets/rougem.png" : "./assets/rougef.png";
+  }
+
+  levelUp(): void {
+    this.maxHealth = Math.floor(Math.random() * 8) + 1;
+    this.currentHealth = this.maxHealth;
+    super.levelUp();
+  }
+}
+
+export class Priest extends Hero {
+  constructor(name, gender, race, level, health, skills, weapon, armor) {
+    super(name, gender, race, level, health, skills, weapon, armor);
+    this.characterRole = ClassOptions.warrior;
+    this.skills.attack--;
+    this.skills.persuade++;
+    this.skills.sneak--;
+    this.skills.intelligence += 2;
+    this.spriteUrl = this.gender === GenderOptions.male ? "./assets/priestm.png" : "./assets/priestf.png";
+  }
+
+  levelUp(): void {
+    this.maxHealth = Math.floor(Math.random() * 6) + 1;
+    this.currentHealth = this.maxHealth;
+    super.levelUp();
   }
 }
