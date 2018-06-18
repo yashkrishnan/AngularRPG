@@ -1,3 +1,6 @@
+import {st} from "@angular/core/src/render3";
+import {min} from "rxjs/operators";
+
 export class Armor {
   name: string;
   attackBarrierBonus: number;
@@ -96,3 +99,16 @@ export class BaseCharacter {
   }
 }
 
+export class Monster extends BaseCharacter {
+  isTrapped: boolean = false;
+  poisonStacks: number = 0;
+  isStrongPoison: boolean= false;
+  hasTakenPoisonDamageThisTurn: boolean = false;
+
+  constructor(name, health, skills, barriers: {attack: number, sneak: number , persuade: number, intelligence: number}, minDamage, maxDamage, spriteUrl) {
+    super(name, health, skills);
+    this.barriers = barriers;
+    this.spriteUrl = spriteUrl;
+    this.equippedWeapon = new Weapon(undefined, minDamage, maxDamage);
+  }
+}
