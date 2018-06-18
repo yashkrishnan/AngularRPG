@@ -1,5 +1,5 @@
 import {RaceOptions, ClassOptions, GenderOptions} from "./character.options";
-import {st} from "@angular/core/src/render3";
+import {b, st} from "@angular/core/src/render3";
 
 export class Armor {
   name: string;
@@ -53,7 +53,7 @@ export class BaseCharacter {
   name: string;
   maxHealth: number;
   currentHealth: number;
-  isInCapacity: boolean;
+  isIncapacitated: boolean;
   barriers: {
     attack: number,
     sneak: number,
@@ -67,6 +67,35 @@ export class BaseCharacter {
   };
   equippedWeapon: Weapon;
   equippedArmor: Armor;
+  spriteUrl: string;
 
-  constructor(name: string, health: number, skills = {atta})
+  constructor(name: string, health: number, skills = {attack: 0, sneak: 0, persuade:0, intelligence:0}) {
+    this.name = name;
+    this.maxHealth = health;
+    this.currentHealth = health;
+    this.skills = skills;
+    this.isIncapacitated = false;
+    this.barriers = {
+      attack: 10,
+      sneak: 10,
+      persuade: 10
+    }
+  }
+
+  attack() {
+    return Math.floor(Math.random() * 20) + 1 + this.skills.attack;
+  }
+
+  sneak() {
+    return Math.floor(Math.random() * 20) + 1 + this.skills.sneak;
+  }
+
+  persuade() {
+    return Math.floor(Math.random() * 20) + 1 + this.skills.persuade;
+  }
+
+  dealDamage() {
+    return Math.floor(Math.random() * (this.equippedWeapon.maxDamage - this.equippedWeapon.minDamage + 1));
+  }
 }
+
