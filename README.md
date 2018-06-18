@@ -1,6 +1,7 @@
 # AngularRPG
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
+Following course on https://www.udemy.com/ultimate-guide-to-building-an-rpg-in-angular
 
 ## Development server
 
