@@ -1,6 +1,3 @@
-import {st} from "@angular/core/src/render3";
-import {min} from "rxjs/operators";
-
 export class Armor {
   name: string;
   attackBarrierBonus: number;
@@ -102,13 +99,63 @@ export class BaseCharacter {
 export class Monster extends BaseCharacter {
   isTrapped: boolean = false;
   poisonStacks: number = 0;
-  isStrongPoison: boolean= false;
+  isStrongPoison: boolean = false;
   hasTakenPoisonDamageThisTurn: boolean = false;
 
-  constructor(name, health, skills, barriers: {attack: number, sneak: number , persuade: number, intelligence: number}, minDamage, maxDamage, spriteUrl) {
+  constructor(name, health, skills, barriers: { attack: number, sneak: number, persuade: number, intelligence: number }, minDamage, maxDamage, spriteUrl) {
     super(name, health, skills);
     this.barriers = barriers;
     this.spriteUrl = spriteUrl;
     this.equippedWeapon = new Weapon(undefined, minDamage, maxDamage);
+  }
+}
+
+export class Hero extends BaseCharacter {
+  gender: string;
+  race: string;
+  characterRole: string;
+  experience: number;
+  level: number;
+  availableSkillPoints: number;
+  hasTrapDefence: boolean;
+  hasDamagingTrap: boolean;
+  turnsUntilSpecialAvailableAgain: number;
+
+  constructor(name, gender, race, level, health, skills, weapon, armor) {
+    super(name, health, skills);
+
+    this.gender = gender;
+    this.race = race;
+    this.experience = 0;
+    this.level = level;
+    this.equippedWeapon = weapon;
+    this.equipNewArmor(armor);
+  }
+
+  levelUp(): void {
+    this.experience -= ExperienceToLevel[this.level];
+    this.level++;
+    this.availableSkillPoints += 2;
+    if (this.experience >= ExperienceToLevel[this.level]) {
+      this.levelUp();
+    }
+  }
+
+  equipNewArmor(armor: Armor): void {
+    if (this.equippedArmor) {
+      this.barriers.attack -= this.equippedArmor.attackBarrierBonus;
+    }
+    this.equippedArmor = armor;
+    this.barriers.attack += armor.attackBarrierBonus;
+  }
+
+  equipNewWeapon(weapon: Weapon): void {
+    this.equippedWeapon = weapon;
+  }
+
+  rest(): void {
+    this.currentHealth = this.maxHealth;
+    this.isIncapacitated = false;
+    this.turnsUntilSpecialAvailableAgain = 0;
   }
 }
